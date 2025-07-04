@@ -1,0 +1,177 @@
+---
+title: 'Authentication API'
+description: 'How to authenticate with the Alertix API'
+---
+
+# API Authentication
+
+The Alertix API uses API keys to authenticate requests. You can view and manage your API keys in the Alertix Dashboard.
+
+## Getting Started
+
+To use the Alertix API, you'll need to:
+
+1. Generate an API key in your Alertix dashboard
+2. Include the API key in your requests
+3. Follow our rate limiting guidelines
+
+<Note>
+  API access is available on Professional plans and above. Enterprise customers receive higher rate limits and additional endpoints.
+</Note>
+
+## Generating an API Key
+
+<Steps>
+  <Step title="Access API Settings">
+    Navigate to Account Settings → API Access in your Alertix dashboard.
+  </Step>
+  <Step title="Create New API Key">
+    Click the "Generate New API Key" button.
+  </Step>
+  <Step title="Set Permissions">
+    Select the appropriate access level for your API key:
+    - Read Only: Can only retrieve data
+    - Standard: Can read data and create/update certain resources
+    - Admin: Full API access (available only on Business and Enterprise plans)
+  </Step>
+  <Step title="Name Your Key">
+    Give your API key a descriptive name to identify its purpose.
+  </Step>
+  <Step title="Copy Your Key">
+    Copy and securely store your API key. For security reasons, we only show it once.
+  </Step>
+</Steps>
+
+<Warning>
+  Treat your API keys like passwords. Don't share them in publicly accessible areas such as GitHub, client-side code, or in your application's source code.
+</Warning>
+
+## Authentication Methods
+
+### Bearer Token Authentication
+
+The preferred way to authenticate with the Alertix API is using Bearer token authentication:
+
+```bash
+curl -X GET "https://api.alertix.com/v1/asins" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+### Query Parameter Authentication
+
+For GET requests only, you can also authenticate by including your API key as a query parameter:
+
+```bash
+curl -X GET "https://api.alertix.com/v1/asins?api_key=YOUR_API_KEY"
+```
+
+<Warning>
+  Query parameter authentication should only be used for testing or in environments where setting headers isn't possible. Bearer token authentication is more secure.
+</Warning>
+
+## API Key Management
+
+<AccordionGroup>
+  <Accordion title="Rotating API Keys">
+    We recommend rotating your API keys periodically for security:
+    
+    1. Generate a new API key
+    2. Update your applications to use the new key
+    3. Verify everything works correctly
+    4. Delete the old API key
+  </Accordion>
+  
+  <Accordion title="Revoking API Keys">
+    If an API key is compromised:
+    
+    1. Immediately delete the compromised key in your dashboard
+    2. Generate a new key with appropriate permissions
+    3. Update your applications with the new key
+    4. Monitor your account for any unauthorized activity
+  </Accordion>
+  
+  <Accordion title="API Key Permissions">
+    Limit API key permissions to only what's necessary:
+    
+    - Read-only keys for reporting applications
+    - Standard keys for operational tools
+    - Admin keys only when absolutely necessary
+  </Accordion>
+</AccordionGroup>
+
+## Rate Limiting
+
+To ensure stability and availability for all users, the Alertix API implements rate limiting:
+
+| Plan | Rate Limit | Burst Capacity |
+|------|------------|----------------|
+| Professional | 60 requests/minute | 100 requests |
+| Business | 300 requests/minute | 500 requests |
+| Enterprise | 1,000+ requests/minute | Custom |
+
+### Rate Limit Headers
+
+All API responses include headers to help you track your rate limit usage:
+
+```
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 56
+X-RateLimit-Reset: 1499356800
+```
+
+<Tip>
+  Implement exponential backoff in your API clients to handle rate limiting gracefully. When you receive a 429 response, wait before retrying.
+</Tip>
+
+## Error Handling
+
+The API uses conventional HTTP response codes to indicate success or failure:
+
+- `2xx` range indicates success
+- `4xx` range indicates an error with the provided information
+- `5xx` range indicates an error with Alertix's servers
+
+### Common Authentication Errors
+
+| Status Code | Error Code | Description |
+|-------------|------------|-------------|
+| 401 | `unauthorized` | No valid API key provided |
+| 403 | `forbidden` | API key doesn't have permission |
+| 429 | `rate_limited` | Rate limit exceeded |
+
+### Example Error Response
+
+```json
+{
+  "error": {
+    "code": "unauthorized",
+    "message": "Invalid API key provided",
+    "documentation_url": "https://docs.alertix.com/api-reference/authentication#errors"
+  }
+}
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Secure Storage" icon="lock">
+    Store API keys securely using environment variables or a secure key management service, never in source code.
+  </Card>
+  
+  <Card title="Least Privilege" icon="shield-check">
+    Use the minimum permissions necessary for each API key based on its intended use.
+  </Card>
+  
+  <Card title="Implement Retry Logic" icon="redo">
+    Add proper retry mechanisms with exponential backoff for handling rate limits and transient errors.
+  </Card>
+  
+  <Card title="Monitor Usage" icon="chart-line">
+    Regularly review API usage in your dashboard to detect unusual patterns that might indicate security issues.
+  </Card>
+</CardGroup>
+
+<Info>
+  For additional help with API authentication, contact our developer support team at api-support@alertix.com.
+</Info>

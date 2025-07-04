@@ -1,0 +1,197 @@
+---
+title: 'Alert Types'
+description: 'Detailed explanation of all alert types available in Alertix'
+---
+
+# Alert Types
+
+Alertix monitors your Amazon listings for various types of changes and sends notifications when important events occur. This page provides a detailed explanation of each alert type to help you understand what changes are being monitored.
+
+## Listing Status Changes
+
+<Frame>
+  <img src="/images/listing-status-alert.png" alt="Listing Status Alert" />
+</Frame>
+
+**Description**: Get notified when listings are suppressed, deleted, or become inactive.
+
+**Why It Matters**: Amazon may remove listings from search results or the catalog due to policy violations, content issues, or other compliance problems. These changes can drastically impact your sales as customers can no longer find or purchase your products.
+
+**Alert Information Provided**:
+- Previous status
+- Current status
+- Timestamp of change
+- Potential reason for suppression (if available)
+- Recommended actions
+
+## Buy Box Status Changes
+
+<Frame>
+  <img src="/images/buy-box-alert.png" alt="Buy Box Alert" />
+</Frame>
+
+**Description**: Receive notifications when you lose or win the Buy Box.
+
+**Why It Matters**: The Buy Box drives 80%+ of Amazon sales. Losing it to competitors can dramatically decrease your sales volume, while winning it back can restore your revenue stream.
+
+**Alert Information Provided**:
+- Previous Buy Box owner
+- Current Buy Box owner
+- Price comparison
+- Timestamp of change
+- Factors that may have influenced the change
+
+<Tip>
+  Buy Box alerts are particularly valuable for products with multiple sellers competing for the same listing.
+</Tip>
+
+## Title Change
+
+<Frame>
+  <img src="/images/title-change-alert.png" alt="Title Change Alert" />
+</Frame>
+
+**Description**: Get alerts when your listing's title changes.
+
+**Why It Matters**: Unauthorized modifications to product titles can affect search ranking, customer expectations, or brand representation. Title changes may be made by Amazon, other sellers with listing access, or through automated systems.
+
+**Alert Information Provided**:
+- Previous title
+- New title
+- Text comparison highlighting specific changes
+- Timestamp of change
+- Potential SEO impact assessment
+
+## Feature Change
+
+<Frame>
+  <img src="/images/feature-change-alert.png" alt="Feature Change Alert" />
+</Frame>
+
+**Description**: Receive alerts when your listing's features change.
+
+**Why It Matters**: Product features (bullet points) are critical for conversion and search visibility. Changes to these elements can misrepresent your product or affect how easily customers can find it.
+
+**Alert Information Provided**:
+- Previous features
+- New features
+- Side-by-side comparison
+- Specific bullets that changed
+- Timestamp of change
+
+## Main Image Change
+
+<Frame>
+  <img src="/images/image-change-alert.png" alt="Image Change Alert" />
+</Frame>
+
+**Description**: Get alerts when your listing's images change.
+
+**Why It Matters**: The primary product image heavily influences click-through rates and conversion. Unauthorized image replacements can misrepresent your product or violate your brand guidelines.
+
+**Alert Information Provided**:
+- Previous image
+- New image
+- Visual comparison
+- Timestamp of change
+- Image quality assessment
+
+<Warning>
+  Image changes can significantly impact conversion rates. Address these alerts promptly to ensure your products are properly represented.
+</Warning>
+
+## Out of Stock Alerts
+
+<Frame>
+  <img src="/images/out-of-stock-alert.png" alt="Out of Stock Alert" />
+</Frame>
+
+**Description**: Receive out of stocks alerts for your listings.
+
+**Why It Matters**: Inventory stockouts can lead to lost sales and negatively impact your search ranking. Early notification allows you to restock quickly or adjust your inventory management.
+
+**Alert Information Provided**:
+- Product details
+- Last known inventory level
+- Timestamp of stockout
+- Historical stockout patterns
+- Estimated sales impact
+
+## Review Count Changes
+
+<Frame>
+  <img src="/images/review-alert.png" alt="Review Alert" />
+</Frame>
+
+**Description**: Get notifications for new Amazon reviews and seller feedback.
+
+**Why It Matters**: Customer reviews significantly impact purchase decisions and your product's visibility. Being alerted to new reviews allows you to respond quickly to negative feedback and monitor product reception.
+
+**Alert Information Provided**:
+- Review rating
+- Review content
+- Customer name
+- Timestamp of review
+- Direct link to respond
+
+<Tip>
+  Responding to negative reviews within 24 hours can increase the chance of the customer updating their review or removing it entirely.
+</Tip>
+
+## Number of Offers
+
+<Frame>
+  <img src="/images/offers-alert.png" alt="Offers Alert" />
+</Frame>
+
+**Description**: Get notified when the number of offers on your listing changes.
+
+**Why It Matters**: Changes in the number of sellers offering your product can indicate shifts in the competitive landscape. New sellers may impact your pricing strategy or Buy Box ownership.
+
+**Alert Information Provided**:
+- Previous number of offers
+- Current number of offers
+- New seller information (if available)
+- Pricing comparison
+- Timestamp of change
+
+## Adult Flagging
+
+<Frame>
+  <img src="/images/adult-flag-alert.png" alt="Adult Flag Alert" />
+</Frame>
+
+**Description**: Get notified if your listing is flagged as adult content.
+
+**Why It Matters**: When Amazon classifies products as adult content, it restricts visibility and advertising options. This classification can significantly reduce your product's reach and sales potential.
+
+**Alert Information Provided**:
+- Current classification status
+- Timestamp of change
+- Potential reasons for flagging
+- Appeal options
+- Recommended actions
+
+<Info>
+  All alert types can be enabled or disabled globally in your Alert Preferences, or configured individually for specific ASINs.
+</Info>
+
+## Alert Priority Levels
+
+Alertix categorizes alerts by priority to help you focus on the most critical issues:
+
+| Priority | Color | Alert Types |
+|----------|-------|-------------|
+| Critical | Red | Listing suppression, Buy Box loss, Adult flagging |
+| High | Orange | Title changes, Main image changes, Out of stock |
+| Medium | Yellow | Feature changes, Number of offers changes |
+| Low | Blue | Review count changes, Minor variations |
+
+<CardGroup cols={2}>
+  <Card title="Customizing Alert Priority" icon="sliders">
+    Business and Enterprise plans allow you to customize the priority level of each alert type based on your specific business needs.
+  </Card>
+  <Card title="Alert Escalation" icon="arrow-up-right">
+    Configure automatic escalation for alerts that remain unresolved after a specified period to ensure critical issues don't get overlooked.
+  </Card>
+</CardGroup>

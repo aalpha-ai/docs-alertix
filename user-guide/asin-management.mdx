@@ -1,0 +1,189 @@
+---
+title: 'ASIN Management'
+description: 'Add, monitor, and manage your Amazon product ASINs'
+---
+
+# ASIN Management
+
+The ASIN Management section allows you to add, monitor, and manage all your Amazon product listings in one centralized location.
+
+## Monitored ASINs Dashboard
+
+<Frame>
+  <img src="/images/monitored-asins.png" alt="Monitored ASINs Dashboard" />
+</Frame>
+
+The Monitored ASINs dashboard serves as your central hub for managing all products being tracked by Alertix.
+
+### Dashboard Features
+
+- **Section Header**: "Monitored ASINs" with count indicator (e.g., "5 ASINs monitored")
+- **Upload ASINs Button**: For bulk addition of products
+- **Search Field**: "Search ASINs..." for finding specific products
+- **Filter Tabs**: Sort by All, Active, or Inactive status
+- **Sort Dropdown**: Arrange ASINs by date created, alphabetically, or by alert count
+
+### Product Cards
+
+Each monitored ASIN is displayed as a card containing:
+
+<CardGroup cols={2}>
+  <Card title="Visual Elements">
+    - Product image
+    - Product title (truncated if too long)
+    - ASIN code (e.g., B0D94YLWJ6)
+    - Status indicator ("Active" or "Inactive")
+  </Card>
+  <Card title="Alert Information">
+    - New alert count
+    - In-progress alert count
+    - Historical alert data
+    - "View Details" button for accessing ASIN-specific information
+  </Card>
+</CardGroup>
+
+<Tip>
+  Hover over a truncated product title to see the full name in a tooltip.
+</Tip>
+
+## Adding ASINs
+
+Alertix provides multiple ways to add products for monitoring:
+
+<Tabs>
+  <Tab title="Individual ASIN">
+    <Steps>
+      <Step title="Click Add ASIN">
+        Select the "Add ASIN" button in the top-right corner of the Monitored ASINs dashboard.
+      </Step>
+      <Step title="Enter ASIN">
+        Type or paste the Amazon ASIN code (10-character alphanumeric identifier).
+      </Step>
+      <Step title="Add Product Details (Optional)">
+        You can add notes or tags to help organize your products.
+      </Step>
+      <Step title="Save">
+        Click "Save" to begin monitoring the ASIN.
+      </Step>
+    </Steps>
+  </Tab>
+  
+  <Tab title="Bulk Upload">
+    <Steps>
+      <Step title="Click Upload ASINs">
+        Select the "Upload ASINs" button in the Monitored ASINs dashboard.
+      </Step>
+      <Step title="Prepare CSV File">
+        Create a CSV file with your ASINs (template available for download).
+      </Step>
+      <Step title="Upload File">
+        Drag and drop your CSV file or click to browse and select it.
+      </Step>
+      <Step title="Review and Confirm">
+        Verify the detected ASINs and click "Confirm" to add them all.
+      </Step>
+    </Steps>
+    
+    <Frame>
+      <img src="/images/bulk-upload.png" alt="Bulk ASIN Upload" />
+    </Frame>
+  </Tab>
+</Tabs>
+
+<Warning>
+  Alertix has a maximum limit of ASINs you can monitor based on your subscription plan. Check your plan details before adding new ASINs.
+</Warning>
+
+## ASIN Details View
+
+<Frame>
+  <img src="/images/asin-details-view.png" alt="ASIN Details View" />
+</Frame>
+
+Clicking "View Details" on any ASIN card opens the detailed view for that specific product.
+
+### Available Information
+
+<AccordionGroup>
+  <Accordion title="Product Information">
+    - Full product title
+    - ASIN code
+    - Product description
+    - Current Amazon listing URL
+    - Product image
+    - Category information
+  </Accordion>
+  
+  <Accordion title="Monitoring Status">
+    - Active/Inactive status
+    - Monitoring start date
+    - Last checked timestamp
+    - Alert history timeline
+  </Accordion>
+  
+  <Accordion title="Alert Preferences">
+    - ASIN-specific alert settings
+    - Override toggles for global preferences
+    - Custom notification settings
+  </Accordion>
+  
+  <Accordion title="Performance Metrics">
+    - Alert frequency over time
+    - Common alert types for this product
+    - Comparative data with similar ASINs
+  </Accordion>
+</AccordionGroup>
+
+### Actions Available
+
+From the ASIN details view, you can:
+
+- **Edit Product Details**: Update notes, tags, or other custom information
+- **Configure Alerts**: Set ASIN-specific alert preferences
+- **View Alert History**: See a timeline of all past alerts for this product
+- **Pause Monitoring**: Temporarily stop monitoring this ASIN
+- **Remove ASIN**: Permanently remove this product from monitoring
+- **View on Amazon**: Open the product listing directly on Amazon
+
+<Info>
+  Changes made to ASIN-specific alert preferences override your global alert settings only for that particular product.
+</Info>
+
+## Managing ASINs
+
+<CardGroup cols={2}>
+  <Card title="Bulk Actions" icon="layer-group">
+    Select multiple ASINs to perform actions like:
+    - Bulk activate/deactivate
+    - Apply tags
+    - Export data
+    - Delete selected ASINs
+  </Card>
+  
+  <Card title="Organization" icon="tags">
+    Keep your ASINs organized with:
+    - Custom tags
+    - Product categories
+    - Priority levels
+    - Custom notes
+  </Card>
+</CardGroup>
+
+<Tip>
+  Use tags to group similar products together for easier management. For example, tag products by brand, category, or supplier.
+</Tip>
+
+## ASIN Limits and Recommendations
+
+Your subscription plan determines how many ASINs you can monitor:
+
+| Plan | ASIN Limit | Recommended For |
+|------|------------|-----------------|
+| Basic | 25 ASINs | Small sellers with limited catalog |
+| Professional | 100 ASINs | Mid-sized sellers with moderate catalog |
+| Business | 500 ASINs | Large sellers with extensive catalog |
+| Enterprise | Unlimited | High-volume sellers and agencies |
+
+<Info>
+  Need to monitor more ASINs? Contact our sales team to discuss custom enterprise plans tailored to your business needs.
+</Info>

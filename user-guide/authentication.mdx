@@ -1,0 +1,102 @@
+---
+title: 'Authentication'
+description: 'Sign in and account creation for Alertix'
+---
+
+# Authentication
+
+Alertix provides a secure and streamlined authentication process to ensure your account and data remain protected while offering a smooth user experience.
+
+## Sign In
+
+<Frame>
+  <img src="/images/sign-in.png" alt="Sign In Screen" />
+</Frame>
+
+The sign-in screen is the entry point for existing users to access their Alertix account.
+
+### UI Elements
+
+- **Alertix Logo**: Red bell icon at the top
+- **Heading**: "Sign in to Alertix"
+- **Welcome Message**: "Welcome back! Please sign in to continue"
+- **Email Input Field**: For entering registered email address
+- **Continue Button**: Proceeds to password entry or authentication
+- **Sign Up Link**: "Don't have an account? Sign up" for new users
+
+### Authentication Process
+
+<Steps>
+  <Step title="Enter Email">
+    Provide the email address associated with your Alertix account.
+  </Step>
+  <Step title="Enter Password">
+    After email validation, enter your secure password.
+  </Step>
+  <Step title="Two-Factor Authentication (if enabled)">
+    Complete the 2FA verification if you've enabled this security feature.
+  </Step>
+  <Step title="Access Dashboard">
+    Upon successful authentication, you'll be directed to your personalized dashboard.
+  </Step>
+</Steps>
+
+<Tip>
+  If you've forgotten your password, click the "Forgot password?" link to initiate the password recovery process.
+</Tip>
+
+## Account Creation
+
+<Frame>
+  <img src="/images/account-creation.png" alt="Account Creation Screen" />
+</Frame>
+
+New users can create an Alertix account through our simple registration form.
+
+### UI Elements
+
+- **Alertix Logo**: Red bell icon at the top
+- **Heading**: "Create your account"
+- **Welcome Message**: "Welcome! Please fill in the details to get started."
+- **Form Fields**:
+  - First name input
+  - Last name input
+  - Email address input
+  - Password input with visibility toggle
+- **Continue Button**: Submits registration information
+- **Sign In Link**: "Already have an account? Sign in" for existing users
+
+### Registration Process
+
+<Steps>
+  <Step title="Complete Registration Form">
+    Fill in all required fields with your personal information.
+  </Step>
+  <Step title="Create Password">
+    Choose a strong password that meets our security requirements.
+  </Step>
+  <Step title="Email Verification">
+    Verify your email address through the confirmation link sent to your inbox.
+  </Step>
+  <Step title="Begin Onboarding">
+    After successful registration, you'll be guided through the onboarding process.
+  </Step>
+</Steps>
+
+<Warning>
+  Password requirements: Minimum 8 characters, including at least one uppercase letter, one lowercase letter, one number, and one special character.
+</Warning>
+
+## Security Measures
+
+Alertix implements several security measures to protect your account:
+
+- **Secure Authentication**: We use Clerk, a trusted authentication provider, to handle all login processes securely.
+- **Email Verification**: All new accounts require email verification to prevent unauthorized access.
+- **Password Protection**: Passwords are securely hashed and never stored in plain text.
+- **Two-Factor Authentication**: Optional 2FA for an additional layer of security.
+- **Session Management**: Automatic session timeouts and the ability to view and manage active sessions.
+
+<Info>
+  For additional security, we recommend enabling two-factor authentication in your account settings after registration.
+</Info>

@@ -1,0 +1,584 @@
+---
+title: 'ASINs API'
+description: 'API endpoints for managing Amazon product ASINs'
+---
+
+# ASINs API
+
+The ASINs API allows you to programmatically manage the Amazon product listings that Alertix monitors for your account.
+
+## Get All ASINs
+
+Retrieve a list of all ASINs currently being monitored in your account.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/asins" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": [
+    {
+      "id": "asn_12345abcde",
+      "code": "B0CMTZLFC9",
+      "title": "Premium Protein Powder - Rich Chocolate Flavor",
+      "status": "active",
+      "created_at": "2025-05-15T10:23:45Z",
+      "image_url": "https://images.amazon.com/images/P/B0CMTZLFC9.jpg",
+      "alert_count": {
+        "new": 2,
+        "in_progress": 1,
+        "resolved": 15
+      },
+      "priority": false
+    },
+    {
+      "id": "asn_67890fghij",
+      "code": "B0D94YLWJ6",
+      "title": "HRDWRK Electrolytes Powder Packets with Magnesium",
+      "status": "active",
+      "created_at": "2025-06-01T14:12:33Z",
+      "image_url": "https://images.amazon.com/images/P/B0D94YLWJ6.jpg",
+      "alert_count": {
+        "new": 0,
+        "in_progress": 0,
+        "resolved": 7
+      },
+      "priority": true
+    }
+  ],
+  "pagination": {
+    "total": 28,
+    "per_page": 25,
+    "current_page": 1,
+    "last_page": 2,
+    "next_page_url": "https://api.alertix.com/v1/asins?page=2"
+  }
+}
+```
+</CodeGroup>
+
+### Query Parameters
+
+<ParamField query="status" type="string">
+  Filter ASINs by status: `active` or `inactive`
+</ParamField>
+
+<ParamField query="priority" type="boolean">
+  Filter ASINs by priority status
+</ParamField>
+
+<ParamField query="search" type="string">
+  Search ASINs by code or title
+</ParamField>
+
+<ParamField query="tag" type="string">
+  Filter ASINs by tag (Business and Enterprise plans only)
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  Page number for pagination
+</ParamField>
+
+<ParamField query="per_page" type="integer" default="25" max="100">
+  Number of results per page
+</ParamField>
+
+## Get ASIN by ID or Code
+
+Retrieve detailed information about a specific ASIN.
+
+<CodeGroup>
+```bash Request by ID
+curl -X GET "https://api.alertix.com/v1/asins/asn_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```bash Request by ASIN Code
+curl -X GET "https://api.alertix.com/v1/asins/code/B0CMTZLFC9" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": {
+    "id": "asn_12345abcde",
+    "code": "B0CMTZLFC9",
+    "title": "Premium Protein Powder - Rich Chocolate Flavor",
+    "description": "High-quality protein supplement with 25g protein per serving",
+    "status": "active",
+    "created_at": "2025-05-15T10:23:45Z",
+    "updated_at": "2025-06-28T09:15:22Z",
+    "image_url": "https://images.amazon.com/images/P/B0CMTZLFC9.jpg",
+    "amazon_url": "https://www.amazon.com/dp/B0CMTZLFC9",
+    "alert_count": {
+      "new": 2,
+      "in_progress": 1,
+      "resolved": 15
+    },
+    "alert_preferences": {
+      "buy_box_change": true,
+      "title_change": true,
+      "feature_change": true,
+      "main_image": true,
+      "out_of_stock": true,
+      "review_count": false,
+      "number_of_offers": true,
+      "adult_flagging": true,
+      "listing_status": true
+    },
+    "priority": false,
+    "tags": ["supplements", "protein"],
+    "notes": "Best-selling product, monitor closely"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id_or_code" type="string" required>
+  The unique identifier or ASIN code of the product
+</ParamField>
+
+## Add ASIN
+
+Add a new ASIN to be monitored.
+
+<CodeGroup>
+```bash Request
+curl -X POST "https://api.alertix.com/v1/asins" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "code": "B0ABCDEFGH",
+    "notes": "New product launch",
+    "priority": true,
+    "tags": ["new", "supplements"],
+    "alert_preferences": {
+      "buy_box_change": true,
+      "title_change": true,
+      "feature_change": false,
+      "main_image": true,
+      "out_of_stock": true,
+      "review_count": false,
+      "number_of_offers": true,
+      "adult_flagging": true,
+      "listing_status": true
+    }
+  }'
+```
+
+```json Response
+{
+  "data": {
+    "id": "asn_newlycreated",
+    "code": "B0ABCDEFGH",
+    "title": "New Vitamin D3 Supplement",
+    "status": "active",
+    "created_at": "2025-07-01T15:30:22Z",
+    "updated_at": "2025-07-01T15:30:22Z",
+    "image_url": "https://images.amazon.com/images/P/B0ABCDEFGH.jpg",
+    "amazon_url": "https://www.amazon.com/dp/B0ABCDEFGH",
+    "alert_count": {
+      "new": 0,
+      "in_progress": 0,
+      "resolved": 0
+    },
+    "alert_preferences": {
+      "buy_box_change": true,
+      "title_change": true,
+      "feature_change": false,
+      "main_image": true,
+      "out_of_stock": true,
+      "review_count": false,
+      "number_of_offers": true,
+      "adult_flagging": true,
+      "listing_status": true
+    },
+    "priority": true,
+    "tags": ["new", "supplements"],
+    "notes": "New product launch"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField body="code" type="string" required>
+  The Amazon ASIN code to add for monitoring
+</ParamField>
+
+<ParamField body="notes" type="string">
+  Optional notes about this ASIN
+</ParamField>
+
+<ParamField body="priority" type="boolean" default="false">
+  Whether this ASIN should be monitored with higher frequency
+</ParamField>
+
+<ParamField body="tags" type="array">
+  Optional array of tags to categorize this ASIN
+</ParamField>
+
+<ParamField body="alert_preferences" type="object">
+  Optional object specifying which alert types to enable for this ASIN
+</ParamField>
+
+## Bulk Add ASINs
+
+Add multiple ASINs to be monitored in a single request.
+
+<CodeGroup>
+```bash Request
+curl -X POST "https://api.alertix.com/v1/asins/bulk" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "asins": [
+      {
+        "code": "B0ABCDEFGH",
+        "notes": "New product launch",
+        "priority": true
+      },
+      {
+        "code": "B0HIJKLMNO",
+        "notes": "Competitor product",
+        "priority": false
+      },
+      {
+        "code": "B0PQRSTUVW",
+        "notes": "Seasonal item",
+        "priority": false
+      }
+    ],
+    "tags": ["bulk-added", "summer-2025"],
+    "alert_preferences": {
+      "buy_box_change": true,
+      "title_change": true,
+      "feature_change": true,
+      "main_image": true,
+      "out_of_stock": true,
+      "review_count": false,
+      "number_of_offers": true,
+      "adult_flagging": true,
+      "listing_status": true
+    }
+  }'
+```
+
+```json Response
+{
+  "data": {
+    "success_count": 3,
+    "failed_count": 0,
+    "failed_asins": [],
+    "successful_asins": [
+      {
+        "id": "asn_bulk1",
+        "code": "B0ABCDEFGH"
+      },
+      {
+        "id": "asn_bulk2",
+        "code": "B0HIJKLMNO"
+      },
+      {
+        "id": "asn_bulk3",
+        "code": "B0PQRSTUVW"
+      }
+    ]
+  }
+}
+```
+</CodeGroup>
+
+<ParamField body="asins" type="array" required>
+  Array of ASIN objects to add
+</ParamField>
+
+<ParamField body="tags" type="array">
+  Optional array of tags to apply to all ASINs in this batch
+</ParamField>
+
+<ParamField body="alert_preferences" type="object">
+  Optional object specifying which alert types to enable for all ASINs in this batch
+</ParamField>
+
+## Update ASIN
+
+Update an existing ASIN's settings.
+
+<CodeGroup>
+```bash Request
+curl -X PATCH "https://api.alertix.com/v1/asins/asn_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "notes": "Updated product notes",
+    "priority": true,
+    "status": "active",
+    "tags": ["updated", "priority"],
+    "alert_preferences": {
+      "review_count": true
+    }
+  }'
+```
+
+```json Response
+{
+  "data": {
+    "id": "asn_12345abcde",
+    "code": "B0CMTZLFC9",
+    "title": "Premium Protein Powder - Rich Chocolate Flavor",
+    "status": "active",
+    "created_at": "2025-05-15T10:23:45Z",
+    "updated_at": "2025-07-01T16:45:12Z",
+    "image_url": "https://images.amazon.com/images/P/B0CMTZLFC9.jpg",
+    "amazon_url": "https://www.amazon.com/dp/B0CMTZLFC9",
+    "alert_count": {
+      "new": 2,
+      "in_progress": 1,
+      "resolved": 15
+    },
+    "alert_preferences": {
+      "buy_box_change": true,
+      "title_change": true,
+      "feature_change": true,
+      "main_image": true,
+      "out_of_stock": true,
+      "review_count": true,
+      "number_of_offers": true,
+      "adult_flagging": true,
+      "listing_status": true
+    },
+    "priority": true,
+    "tags": ["updated", "priority"],
+    "notes": "Updated product notes"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the ASIN
+</ParamField>
+
+<ParamField body="notes" type="string">
+  Optional notes about this ASIN
+</ParamField>
+
+<ParamField body="priority" type="boolean">
+  Whether this ASIN should be monitored with higher frequency
+</ParamField>
+
+<ParamField body="status" type="string">
+  Update ASIN status: `active` or `inactive`
+</ParamField>
+
+<ParamField body="tags" type="array">
+  Optional array of tags to categorize this ASIN
+</ParamField>
+
+<ParamField body="alert_preferences" type="object">
+  Optional object specifying which alert types to enable for this ASIN
+</ParamField>
+
+## Delete ASIN
+
+Remove an ASIN from monitoring.
+
+<CodeGroup>
+```bash Request
+curl -X DELETE "https://api.alertix.com/v1/asins/asn_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": {
+    "success": true,
+    "message": "ASIN B0CMTZLFC9 has been removed from monitoring"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the ASIN
+</ParamField>
+
+## Get ASIN Alerts
+
+Retrieve all alerts for a specific ASIN.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/asins/asn_12345abcde/alerts" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": [
+    {
+      "id": "alt_asin_alert1",
+      "type": "title_change",
+      "status": "new",
+      "created_at": "2025-06-30T15:23:45Z",
+      "priority": "medium",
+      "details": {
+        "previous_title": "Premium Protein Powder - Chocolate Flavor",
+        "current_title": "Premium Protein Powder - Rich Chocolate Flavor"
+      }
+    },
+    {
+      "id": "alt_asin_alert2",
+      "type": "buy_box_change",
+      "status": "in_progress",
+      "created_at": "2025-06-28T09:12:33Z",
+      "priority": "high",
+      "details": {
+        "previous_owner": "Your Store",
+        "current_owner": "Competitor Store",
+        "previous_price": 29.99,
+        "current_price": 27.50
+      }
+    }
+  ],
+  "pagination": {
+    "total": 18,
+    "per_page": 25,
+    "current_page": 1,
+    "last_page": 1
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the ASIN
+</ParamField>
+
+<ParamField query="status" type="string">
+  Filter alerts by status: `new`, `in_progress`, or `resolved`
+</ParamField>
+
+<ParamField query="type" type="string">
+  Filter alerts by type (e.g., `buy_box_change`, `title_change`)
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  Page number for pagination
+</ParamField>
+
+<ParamField query="per_page" type="integer" default="25" max="100">
+  Number of results per page
+</ParamField>
+
+## Get ASIN History
+
+Retrieve historical data for a specific ASIN.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/asins/asn_12345abcde/history" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": {
+    "title_history": [
+      {
+        "value": "Premium Protein Powder - Rich Chocolate Flavor",
+        "recorded_at": "2025-06-28T09:12:33Z"
+      },
+      {
+        "value": "Premium Protein Powder - Chocolate Flavor",
+        "recorded_at": "2025-05-15T10:23:45Z"
+      }
+    ],
+    "price_history": [
+      {
+        "value": 27.50,
+        "recorded_at": "2025-06-28T09:12:33Z"
+      },
+      {
+        "value": 29.99,
+        "recorded_at": "2025-06-01T14:12:33Z"
+      },
+      {
+        "value": 32.99,
+        "recorded_at": "2025-05-15T10:23:45Z"
+      }
+    ],
+    "buy_box_history": [
+      {
+        "seller": "Competitor Store",
+        "recorded_at": "2025-06-28T09:12:33Z"
+      },
+      {
+        "seller": "Your Store",
+        "recorded_at": "2025-05-15T10:23:45Z"
+      }
+    ],
+    "offer_count_history": [
+      {
+        "value": 5,
+        "recorded_at": "2025-06-28T09:12:33Z"
+      },
+      {
+        "value": 3,
+        "recorded_at": "2025-05-15T10:23:45Z"
+      }
+    ]
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the ASIN
+</ParamField>
+
+<ParamField query="start_date" type="string" format="date">
+  Start date for historical data (ISO 8601 format)
+</ParamField>
+
+<ParamField query="end_date" type="string" format="date">
+  End date for historical data (ISO 8601 format)
+</ParamField>
+
+<ParamField query="data_types" type="string">
+  Comma-separated list of data types to include (e.g., `title,price,buy_box,offer_count`)
+</ParamField>
+
+## Error Codes
+
+| Status Code | Error Code | Description |
+|-------------|------------|-------------|
+| 400 | `invalid_request` | The request was malformed or missing required parameters |
+| 404 | `not_found` | The requested ASIN was not found |
+| 403 | `forbidden` | You don't have permission to access this ASIN |
+| 422 | `validation_failed` | The request data failed validation |
+| 429 | `rate_limited` | You've exceeded the rate limit for this endpoint |
+| 507 | `asin_limit_exceeded` | You've reached your plan's limit for monitored ASINs |
+
+## Rate Limits
+
+ASIN API endpoints are subject to the standard rate limits based on your subscription plan:
+
+| Plan | Rate Limit | Burst Capacity |
+|------|------------|----------------|
+| Professional | 60 requests/minute | 100 requests |
+| Business | 300 requests/minute | 500 requests |
+| Enterprise | 1,000+ requests/minute | Custom |
+
+<Info>
+  For additional help with the ASINs API, contact our developer support team at api-support@alertix.com.
+</Info>
