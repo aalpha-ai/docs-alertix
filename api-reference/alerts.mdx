@@ -1,0 +1,377 @@
+---
+title: 'Alerts API'
+description: 'API endpoints for managing and retrieving alerts'
+---
+
+# Alerts API
+
+The Alerts API allows you to programmatically access and manage alert data from your Alertix account. This enables you to integrate alert information into your own systems and workflows.
+
+## Get All Alerts
+
+Retrieve a list of alerts based on specified filters.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/alerts" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": [
+    {
+      "id": "alt_12345abcde",
+      "type": "buy_box_change",
+      "status": "new",
+      "created_at": "2025-06-30T15:23:45Z",
+      "asin": {
+        "id": "asn_67890fghij",
+        "code": "B0D94YLWJ6",
+        "title": "HRDWRK Electrolytes Powder Packets"
+      },
+      "priority": "high",
+      "details": {
+        "previous_owner": "Your Store",
+        "current_owner": "Competitor Store",
+        "previous_price": 24.99,
+        "current_price": 22.50
+      }
+    },
+    {
+      "id": "alt_67890fghij",
+      "type": "title_change",
+      "status": "in_progress",
+      "created_at": "2025-06-29T09:12:33Z",
+      "asin": {
+        "id": "asn_12345abcde",
+        "code": "B0CMTZLFC9",
+        "title": "Premium Protein Powder"
+      },
+      "priority": "medium",
+      "details": {
+        "previous_title": "Premium Protein Powder - Chocolate Flavor",
+        "current_title": "Premium Protein Powder - Rich Chocolate Flavor"
+      }
+    }
+  ],
+  "pagination": {
+    "total": 143,
+    "per_page": 25,
+    "current_page": 1,
+    "last_page": 6,
+    "next_page_url": "https://api.alertix.com/v1/alerts?page=2"
+  }
+}
+```
+</CodeGroup>
+
+### Query Parameters
+
+<ParamField query="status" type="string">
+  Filter alerts by status: `new`, `in_progress`, or `resolved`
+</ParamField>
+
+<ParamField query="type" type="string">
+  Filter alerts by type (e.g., `buy_box_change`, `title_change`, `image_change`)
+</ParamField>
+
+<ParamField query="priority" type="string">
+  Filter alerts by priority: `critical`, `high`, `medium`, or `low`
+</ParamField>
+
+<ParamField query="asin" type="string">
+  Filter alerts by ASIN code
+</ParamField>
+
+<ParamField query="start_date" type="string" format="date">
+  Filter alerts created on or after this date (ISO 8601 format)
+</ParamField>
+
+<ParamField query="end_date" type="string" format="date">
+  Filter alerts created on or before this date (ISO 8601 format)
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  Page number for pagination
+</ParamField>
+
+<ParamField query="per_page" type="integer" default="25" max="100">
+  Number of results per page
+</ParamField>
+
+## Get Alert by ID
+
+Retrieve detailed information about a specific alert.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/alerts/alt_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": {
+    "id": "alt_12345abcde",
+    "type": "buy_box_change",
+    "status": "new",
+    "created_at": "2025-06-30T15:23:45Z",
+    "updated_at": "2025-06-30T15:23:45Z",
+    "asin": {
+      "id": "asn_67890fghij",
+      "code": "B0D94YLWJ6",
+      "title": "HRDWRK Electrolytes Powder Packets",
+      "image_url": "https://images.amazon.com/images/P/B0D94YLWJ6.jpg"
+    },
+    "priority": "high",
+    "details": {
+      "previous_owner": "Your Store",
+      "current_owner": "Competitor Store",
+      "previous_price": 24.99,
+      "current_price": 22.50,
+      "price_difference": -2.49,
+      "price_difference_percentage": -9.96
+    },
+    "notes": [],
+    "assigned_to": null
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the alert
+</ParamField>
+
+## Update Alert Status
+
+Update the status of an existing alert.
+
+<CodeGroup>
+```bash Request
+curl -X PATCH "https://api.alertix.com/v1/alerts/alt_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "status": "in_progress",
+    "notes": "Working on price adjustment"
+  }'
+```
+
+```json Response
+{
+  "data": {
+    "id": "alt_12345abcde",
+    "type": "buy_box_change",
+    "status": "in_progress",
+    "created_at": "2025-06-30T15:23:45Z",
+    "updated_at": "2025-07-01T09:15:22Z",
+    "asin": {
+      "id": "asn_67890fghij",
+      "code": "B0D94YLWJ6",
+      "title": "HRDWRK Electrolytes Powder Packets"
+    },
+    "priority": "high",
+    "details": {
+      "previous_owner": "Your Store",
+      "current_owner": "Competitor Store",
+      "previous_price": 24.99,
+      "current_price": 22.50
+    },
+    "notes": [
+      {
+        "id": "note_12345abcde",
+        "content": "Working on price adjustment",
+        "created_at": "2025-07-01T09:15:22Z",
+        "user": {
+          "id": "usr_12345abcde",
+          "name": "John Smith"
+        }
+      }
+    ],
+    "assigned_to": null
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the alert
+</ParamField>
+
+<ParamField body="status" type="string">
+  New status for the alert: `new`, `in_progress`, or `resolved`
+</ParamField>
+
+<ParamField body="notes" type="string">
+  Optional note to add to the alert
+</ParamField>
+
+<ParamField body="assigned_to" type="string">
+  Optional user ID to assign the alert to (Business and Enterprise plans only)
+</ParamField>
+
+## Add Note to Alert
+
+Add a note to an existing alert.
+
+<CodeGroup>
+```bash Request
+curl -X POST "https://api.alertix.com/v1/alerts/alt_12345abcde/notes" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content": "Price has been adjusted in Seller Central"
+  }'
+```
+
+```json Response
+{
+  "data": {
+    "id": "note_67890fghij",
+    "content": "Price has been adjusted in Seller Central",
+    "created_at": "2025-07-01T10:30:15Z",
+    "user": {
+      "id": "usr_12345abcde",
+      "name": "John Smith"
+    }
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the alert
+</ParamField>
+
+<ParamField body="content" type="string" required>
+  The content of the note
+</ParamField>
+
+## Get Alert Count
+
+Get a count of alerts grouped by status and type.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/alerts/count" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": {
+    "total": 143,
+    "by_status": {
+      "new": 42,
+      "in_progress": 15,
+      "resolved": 86
+    },
+    "by_type": {
+      "buy_box_change": 28,
+      "title_change": 15,
+      "image_change": 22,
+      "feature_change": 18,
+      "listing_status": 12,
+      "out_of_stock": 31,
+      "review_count": 17
+    },
+    "by_priority": {
+      "critical": 8,
+      "high": 35,
+      "medium": 62,
+      "low": 38
+    }
+  }
+}
+```
+</CodeGroup>
+
+<ParamField query="start_date" type="string" format="date">
+  Count alerts created on or after this date (ISO 8601 format)
+</ParamField>
+
+<ParamField query="end_date" type="string" format="date">
+  Count alerts created on or before this date (ISO 8601 format)
+</ParamField>
+
+<ParamField query="asin" type="string">
+  Count alerts for a specific ASIN code
+</ParamField>
+
+## Alert Webhooks
+
+<Info>
+  Webhook functionality is available on Business and Enterprise plans only.
+</Info>
+
+You can configure webhooks to receive real-time notifications when new alerts are generated or when alert statuses change.
+
+### Webhook Payload Example
+
+```json
+{
+  "event_type": "alert.created",
+  "created_at": "2025-07-01T14:22:33Z",
+  "data": {
+    "id": "alt_12345abcde",
+    "type": "buy_box_change",
+    "status": "new",
+    "created_at": "2025-07-01T14:22:30Z",
+    "asin": {
+      "id": "asn_67890fghij",
+      "code": "B0D94YLWJ6",
+      "title": "HRDWRK Electrolytes Powder Packets"
+    },
+    "priority": "high",
+    "details": {
+      "previous_owner": "Your Store",
+      "current_owner": "Competitor Store",
+      "previous_price": 24.99,
+      "current_price": 22.50
+    }
+  }
+}
+```
+
+### Webhook Event Types
+
+- `alert.created`: Triggered when a new alert is generated
+- `alert.updated`: Triggered when an alert's status or details are updated
+- `alert.resolved`: Triggered when an alert is marked as resolved
+- `alert.assigned`: Triggered when an alert is assigned to a user
+
+### Configuring Webhooks
+
+To set up webhooks, navigate to Account Settings → API Access → Webhooks in your Alertix dashboard.
+
+<Tip>
+  Implement webhook signature verification to ensure the webhook requests are coming from Alertix. The signature is included in the `X-Alertix-Signature` header.
+</Tip>
+
+## Error Codes
+
+| Status Code | Error Code | Description |
+|-------------|------------|-------------|
+| 400 | `invalid_request` | The request was malformed or missing required parameters |
+| 404 | `not_found` | The requested alert was not found |
+| 403 | `forbidden` | You don't have permission to access this alert |
+| 422 | `validation_failed` | The request data failed validation |
+
+## Rate Limits
+
+Alert API endpoints are subject to the standard rate limits based on your subscription plan:
+
+| Plan | Rate Limit | Burst Capacity |
+|------|------------|----------------|
+| Professional | 60 requests/minute | 100 requests |
+| Business | 300 requests/minute | 500 requests |
+| Enterprise | 1,000+ requests/minute | Custom |
+
+<Info>
+  For additional help with the Alerts API, contact our developer support team at api-support@alertix.com.
+</Info>

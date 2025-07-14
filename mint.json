@@ -1,0 +1,98 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "venus",
+  "name": "Alertix",
+  "logo": {
+    "light": "/public/bell-red.png",
+    "dark": "/public/bell-red.png"
+  },
+  "favicon": "/public/icon.ico",
+  "colors": {
+    "primary": "#FF4B4B",
+    "light": "#FF7171",
+    "dark": "#D62C2C",
+    "anchors": {
+      "from": "#FF4B4B",
+      "to": "#D62C2C"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@alertix.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://app.alertix.com"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "API Reference",
+      "icon": "code",
+      "url": "api-reference"
+    },
+    {
+      "name": "Community",
+      "icon": "discord",
+      "url": "https://discord.gg/alertix"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "introduction"
+      ]
+    },
+    {
+      "group": "User Guide",
+      "pages": [
+        "user-guide/authentication",
+        "user-guide/onboarding",
+        "user-guide/dashboard",
+        "user-guide/alert-preferences",
+        "user-guide/asin-management",
+        "user-guide/alert-dashboard",
+        "user-guide/account-management",
+        "user-guide/marketing-preferences"
+      ]
+    },
+    {
+      "group": "Features",
+      "pages": [
+        "features/alert-types",
+        "features/asin-monitoring",
+        "features/notifications"
+      ]
+    },
+    {
+      "group": "Security & Support",
+      "pages": [
+        "support/security",
+        "support/help",
+        "support/billing"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/authentication",
+        "api-reference/alerts",
+        "api-reference/asins",
+        "api-reference/users"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/alertix",
+    "github": "https://github.com/alertix",
+    "linkedin": "https://www.linkedin.com/company/alertix"
+  }
+}

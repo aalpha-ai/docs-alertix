@@ -1,0 +1,232 @@
+---
+title: 'Notifications'
+description: 'How Alertix delivers timely alerts about your Amazon listings'
+---
+
+# Notifications
+
+Alertix provides a comprehensive notification system to ensure you're promptly informed about important changes to your Amazon listings. This page explains the different notification channels and how to configure them for optimal awareness.
+
+## Notification Channels
+
+<Frame>
+  <img src="/images/notification-channels.png" alt="Notification Channels" />
+</Frame>
+
+Alertix delivers alerts through multiple channels to ensure you never miss important updates:
+
+<CardGroup cols={3}>
+  <Card title="Email Notifications" icon="envelope">
+    Receive detailed alerts directly to your inbox with comprehensive information about detected changes.
+  </Card>
+  <Card title="In-App Notifications" icon="bell">
+    Access a centralized notification center within the Alertix dashboard for all your alerts.
+  </Card>
+  <Card title="Mobile Push Notifications" icon="mobile">
+    Get instant alerts on your mobile device through the Alertix mobile app (iOS and Android).
+  </Card>
+</CardGroup>
+
+<Info>
+  Business and Enterprise plans include additional notification options like SMS alerts, Slack integration, and webhook support.
+</Info>
+
+## Email Notifications
+
+<Frame>
+  <img src="/images/email-notification.png" alt="Email Notification Example" />
+</Frame>
+
+Email notifications provide detailed information about detected changes:
+
+### Email Features
+
+- **Rich formatting** with visual comparisons of changes
+- **Direct links** to view the alert in your Alertix dashboard
+- **Action buttons** to quickly respond to alerts
+- **Severity indicators** to highlight critical issues
+- **Customizable frequency** (immediate, digest, or scheduled)
+
+### Email Configuration Options
+
+<Tabs>
+  <Tab title="Delivery Frequency">
+    Choose when you receive email notifications:
+    - **Immediate**: Sent as soon as changes are detected
+    - **Hourly Digest**: Consolidated hourly summary
+    - **Daily Digest**: Once-daily summary of all changes
+    - **Weekly Summary**: Weekly report of all activity
+  </Tab>
+  
+  <Tab title="Content Filtering">
+    Control which alerts trigger email notifications:
+    - Filter by alert type
+    - Filter by priority level
+    - Filter by specific ASINs or product groups
+    - Minimum threshold settings for certain alert types
+  </Tab>
+  
+  <Tab title="Recipient Management">
+    Configure who receives email notifications:
+    - Primary account email
+    - Additional team member emails
+    - Role-based distribution (Business/Enterprise)
+    - Department or function-specific routing
+  </Tab>
+</Tabs>
+
+<Tip>
+  For high-volume sellers, we recommend using daily digests for lower-priority alerts and immediate notifications for critical issues.
+</Tip>
+
+## In-App Notifications
+
+<Frame>
+  <img src="/images/in-app-notifications.png" alt="In-App Notification Center" />
+</Frame>
+
+The in-app notification center provides a centralized hub for all your alerts within the Alertix dashboard:
+
+### In-App Features
+
+- **Real-time updates** without refreshing the page
+- **Filtering and sorting** options to find specific alerts
+- **Mark as read/unread** functionality
+- **Bulk action tools** for managing multiple alerts
+- **Detailed view** with full alert information
+- **Alert history** for reviewing past notifications
+
+### Notification Center Organization
+
+<AccordionGroup>
+  <Accordion title="Notification Categories">
+    Alerts are organized into categories for easier management:
+    - New (unread alerts)
+    - In Progress (alerts you're working on)
+    - Resolved (completed alerts)
+    - All (complete notification history)
+  </Accordion>
+  
+  <Accordion title="Priority Indicators">
+    Visual cues help identify the most important alerts:
+    - Color-coding by severity
+    - Priority badges
+    - Time-sensitive indicators
+    - Resolution status markers
+  </Accordion>
+  
+  <Accordion title="Quick Actions">
+    Take action directly from the notification center:
+    - Mark as read/unread
+    - Mark as in progress
+    - Resolve alert
+    - Assign to team member
+    - Add notes or comments
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+  Clearing notifications from the in-app center doesn't delete the underlying alert data. You can always access your complete alert history in the Alerts section.
+</Warning>
+
+## Mobile Push Notifications
+
+<Frame>
+  <img src="/images/mobile-push-notification.png" alt="Mobile Push Notification" />
+</Frame>
+
+Stay informed on the go with push notifications delivered to your mobile device:
+
+### Mobile Notification Features
+
+- **Instant delivery** for time-sensitive alerts
+- **Customizable alert sounds** for different priority levels
+- **Rich notifications** with preview information
+- **Direct deep links** to specific alerts in the mobile app
+- **Quick actions** directly from the notification
+
+### Mobile Configuration Options
+
+<Steps>
+  <Step title="Download the App">
+    Install the Alertix mobile app from the App Store (iOS) or Google Play Store (Android).
+  </Step>
+  <Step title="Enable Push Notifications">
+    Grant notification permissions when prompted during setup or enable them in your device settings.
+  </Step>
+  <Step title="Configure Alert Types">
+    Choose which types of alerts should trigger push notifications in your app settings.
+  </Step>
+  <Step title="Set Quiet Hours">
+    Optionally configure quiet hours when only critical alerts will trigger notifications.
+  </Step>
+</Steps>
+
+<Info>
+  The mobile app is available on all subscription plans and provides the same core functionality as the web dashboard.
+</Info>
+
+## Advanced Notification Options
+
+<CardGroup cols={2}>
+  <Card title="SMS Alerts" icon="comment-sms">
+    Receive text message alerts for critical changes that require immediate attention. Available on Business and Enterprise plans.
+  </Card>
+  
+  <Card title="Slack Integration" icon="slack">
+    Send alerts directly to designated Slack channels for team visibility and collaboration. Available on Business and Enterprise plans.
+  </Card>
+  
+  <Card title="Webhook Support" icon="code">
+    Connect Alertix to your own systems using custom webhooks for automated workflows. Available on Enterprise plans.
+  </Card>
+  
+  <Card title="API Access" icon="plug">
+    Programmatically access alert data through our API for custom integrations. Available on Enterprise plans.
+  </Card>
+</CardGroup>
+
+## Notification Best Practices
+
+<AccordionGroup>
+  <Accordion title="Prioritize Critical Alerts">
+    Configure your most important alert types (like listing suppressions and Buy Box changes) for immediate notification across all channels, while using digests for less critical updates.
+  </Accordion>
+  
+  <Accordion title="Assign Team Responsibilities">
+    For Business and Enterprise users, route different types of alerts to specific team members based on their roles and responsibilities.
+  </Accordion>
+  
+  <Accordion title="Use Quiet Hours Strategically">
+    Configure quiet hours for non-critical notifications during your off-hours, while ensuring truly urgent alerts can still come through.
+  </Accordion>
+  
+  <Accordion title="Regular Notification Audit">
+    Periodically review your notification settings to ensure you're not experiencing alert fatigue or missing important updates.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  Create a "VIP ASIN" list for your most valuable products and configure these for priority notifications across all channels.
+</Tip>
+
+## Troubleshooting Notifications
+
+<Steps>
+  <Step title="Check Notification Settings">
+    Verify that notifications are enabled for the specific alert types you want to receive.
+  </Step>
+  <Step title="Confirm Email Delivery">
+    Add notifications@alertix.com to your email contacts to prevent alerts from being filtered as spam.
+  </Step>
+  <Step title="Verify Mobile Settings">
+    Ensure push notifications are enabled both in the Alertix app and in your device settings.
+  </Step>
+  <Step title="Test Notification System">
+    Use the "Test Notification" feature in Account Settings to verify your configuration.
+  </Step>
+</Steps>
+
+<Info>
+  Need help with notification setup? Contact our support team for assistance configuring your alert delivery preferences.
+</Info>

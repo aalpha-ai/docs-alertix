@@ -1,0 +1,508 @@
+---
+title: 'Users API'
+description: 'API endpoints for managing user accounts and team members'
+---
+
+# Users API
+
+The Users API allows Business and Enterprise customers to programmatically manage user accounts and team members within their Alertix organization.
+
+<Note>
+  The Users API is only available to Business and Enterprise plans. Basic and Professional plans have limited user management capabilities through the web interface only.
+</Note>
+
+## Get All Users
+
+Retrieve a list of all users in your organization.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/users" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": [
+    {
+      "id": "usr_12345abcde",
+      "email": "john@example.com",
+      "name": "John Smith",
+      "role": "admin",
+      "status": "active",
+      "created_at": "2025-01-15T10:23:45Z",
+      "last_login_at": "2025-07-01T09:15:22Z"
+    },
+    {
+      "id": "usr_67890fghij",
+      "email": "sarah@example.com",
+      "name": "Sarah Johnson",
+      "role": "manager",
+      "status": "active",
+      "created_at": "2025-03-22T14:12:33Z",
+      "last_login_at": "2025-06-30T16:45:12Z"
+    },
+    {
+      "id": "usr_abcde12345",
+      "email": "mike@example.com",
+      "name": "Mike Williams",
+      "role": "analyst",
+      "status": "invited",
+      "created_at": "2025-07-01T08:30:15Z",
+      "last_login_at": null
+    }
+  ],
+  "pagination": {
+    "total": 3,
+    "per_page": 25,
+    "current_page": 1,
+    "last_page": 1
+  }
+}
+```
+</CodeGroup>
+
+### Query Parameters
+
+<ParamField query="status" type="string">
+  Filter users by status: `active`, `inactive`, or `invited`
+</ParamField>
+
+<ParamField query="role" type="string">
+  Filter users by role: `admin`, `manager`, or `analyst`
+</ParamField>
+
+<ParamField query="search" type="string">
+  Search users by name or email
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  Page number for pagination
+</ParamField>
+
+<ParamField query="per_page" type="integer" default="25" max="100">
+  Number of results per page
+</ParamField>
+
+## Get User by ID
+
+Retrieve detailed information about a specific user.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/users/usr_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": {
+    "id": "usr_12345abcde",
+    "email": "john@example.com",
+    "name": "John Smith",
+    "role": "admin",
+    "status": "active",
+    "created_at": "2025-01-15T10:23:45Z",
+    "updated_at": "2025-06-15T14:30:22Z",
+    "last_login_at": "2025-07-01T09:15:22Z",
+    "permissions": {
+      "manage_users": true,
+      "manage_billing": true,
+      "manage_asins": true,
+      "manage_alerts": true,
+      "view_analytics": true,
+      "api_access": true
+    },
+    "preferences": {
+      "email_notifications": {
+        "critical_alerts": true,
+        "high_priority_alerts": true,
+        "medium_priority_alerts": true,
+        "low_priority_alerts": false,
+        "weekly_summary": true
+      },
+      "timezone": "America/New_York",
+      "ui_theme": "system"
+    }
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the user
+</ParamField>
+
+## Create User
+
+Invite a new user to your organization.
+
+<CodeGroup>
+```bash Request
+curl -X POST "https://api.alertix.com/v1/users" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "new.user@example.com",
+    "name": "New User",
+    "role": "analyst",
+    "permissions": {
+      "manage_asins": true,
+      "manage_alerts": true,
+      "view_analytics": true,
+      "api_access": false
+    }
+  }'
+```
+
+```json Response
+{
+  "data": {
+    "id": "usr_newlycreated",
+    "email": "new.user@example.com",
+    "name": "New User",
+    "role": "analyst",
+    "status": "invited",
+    "created_at": "2025-07-01T15:30:22Z",
+    "updated_at": "2025-07-01T15:30:22Z",
+    "last_login_at": null,
+    "permissions": {
+      "manage_users": false,
+      "manage_billing": false,
+      "manage_asins": true,
+      "manage_alerts": true,
+      "view_analytics": true,
+      "api_access": false
+    },
+    "invite_url": "https://app.alertix.com/invite/abc123def456",
+    "invite_expires_at": "2025-07-08T15:30:22Z"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField body="email" type="string" required>
+  Email address of the new user
+</ParamField>
+
+<ParamField body="name" type="string" required>
+  Full name of the new user
+</ParamField>
+
+<ParamField body="role" type="string" required>
+  Role for the new user: `admin`, `manager`, or `analyst`
+</ParamField>
+
+<ParamField body="permissions" type="object">
+  Optional specific permissions to override the default role permissions
+</ParamField>
+
+<Warning>
+  User invitations expire after 7 days. If a user doesn't accept their invitation within this timeframe, you'll need to send a new invitation.
+</Warning>
+
+## Update User
+
+Update an existing user's information or permissions.
+
+<CodeGroup>
+```bash Request
+curl -X PATCH "https://api.alertix.com/v1/users/usr_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John A. Smith",
+    "role": "manager",
+    "permissions": {
+      "api_access": true
+    }
+  }'
+```
+
+```json Response
+{
+  "data": {
+    "id": "usr_12345abcde",
+    "email": "john@example.com",
+    "name": "John A. Smith",
+    "role": "manager",
+    "status": "active",
+    "created_at": "2025-01-15T10:23:45Z",
+    "updated_at": "2025-07-01T16:45:12Z",
+    "last_login_at": "2025-07-01T09:15:22Z",
+    "permissions": {
+      "manage_users": false,
+      "manage_billing": false,
+      "manage_asins": true,
+      "manage_alerts": true,
+      "view_analytics": true,
+      "api_access": true
+    }
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the user
+</ParamField>
+
+<ParamField body="name" type="string">
+  Updated name for the user
+</ParamField>
+
+<ParamField body="role" type="string">
+  Updated role for the user: `admin`, `manager`, or `analyst`
+</ParamField>
+
+<ParamField body="status" type="string">
+  Update user status: `active` or `inactive`
+</ParamField>
+
+<ParamField body="permissions" type="object">
+  Optional specific permissions to update
+</ParamField>
+
+<Info>
+  When changing a user's role, their permissions will automatically update to match the new role's default permissions unless specific permissions are provided.
+</Info>
+
+## Deactivate User
+
+Deactivate a user's access to your organization.
+
+<CodeGroup>
+```bash Request
+curl -X PATCH "https://api.alertix.com/v1/users/usr_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "status": "inactive"
+  }'
+```
+
+```json Response
+{
+  "data": {
+    "id": "usr_12345abcde",
+    "email": "john@example.com",
+    "name": "John A. Smith",
+    "role": "manager",
+    "status": "inactive",
+    "created_at": "2025-01-15T10:23:45Z",
+    "updated_at": "2025-07-01T17:30:15Z",
+    "last_login_at": "2025-07-01T09:15:22Z"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the user
+</ParamField>
+
+<Warning>
+  Deactivating a user immediately revokes their access to your Alertix organization. Their account remains in your organization but they cannot log in.
+</Warning>
+
+## Delete User
+
+Permanently remove a user from your organization.
+
+<CodeGroup>
+```bash Request
+curl -X DELETE "https://api.alertix.com/v1/users/usr_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": {
+    "success": true,
+    "message": "User has been permanently deleted from your organization"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the user
+</ParamField>
+
+<Warning>
+  This action permanently deletes the user from your organization and cannot be undone. Consider deactivating users instead if you may need to restore their access in the future.
+</Warning>
+
+## Resend Invitation
+
+Resend an invitation to a user who hasn't yet accepted their initial invitation.
+
+<CodeGroup>
+```bash Request
+curl -X POST "https://api.alertix.com/v1/users/usr_abcde12345/resend-invitation" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": {
+    "id": "usr_abcde12345",
+    "email": "mike@example.com",
+    "name": "Mike Williams",
+    "status": "invited",
+    "invite_url": "https://app.alertix.com/invite/xyz789abc123",
+    "invite_expires_at": "2025-07-08T17:45:30Z"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the invited user
+</ParamField>
+
+<Info>
+  You can only resend invitations to users with a status of `invited`. The new invitation will expire 7 days from when it is resent.
+</Info>
+
+## Get User Activity
+
+Retrieve a log of a user's recent activity.
+
+<CodeGroup>
+```bash Request
+curl -X GET "https://api.alertix.com/v1/users/usr_12345abcde/activity" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```json Response
+{
+  "data": [
+    {
+      "id": "act_12345abcde",
+      "type": "alert.status_change",
+      "description": "Changed alert status from 'new' to 'in_progress'",
+      "resource_type": "alert",
+      "resource_id": "alt_67890fghij",
+      "created_at": "2025-07-01T14:23:45Z",
+      "ip_address": "192.168.1.1",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+    },
+    {
+      "id": "act_67890fghij",
+      "type": "asin.added",
+      "description": "Added new ASIN B0ABCDEFGH for monitoring",
+      "resource_type": "asin",
+      "resource_id": "asn_12345abcde",
+      "created_at": "2025-07-01T10:15:22Z",
+      "ip_address": "192.168.1.1",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+    }
+  ],
+  "pagination": {
+    "total": 145,
+    "per_page": 25,
+    "current_page": 1,
+    "last_page": 6,
+    "next_page_url": "https://api.alertix.com/v1/users/usr_12345abcde/activity?page=2"
+  }
+}
+```
+</CodeGroup>
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the user
+</ParamField>
+
+<ParamField query="start_date" type="string" format="date">
+  Filter activity on or after this date (ISO 8601 format)
+</ParamField>
+
+<ParamField query="end_date" type="string" format="date">
+  Filter activity on or before this date (ISO 8601 format)
+</ParamField>
+
+<ParamField query="type" type="string">
+  Filter by activity type (e.g., `alert.status_change`, `asin.added`)
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  Page number for pagination
+</ParamField>
+
+<ParamField query="per_page" type="integer" default="25" max="100">
+  Number of results per page
+</ParamField>
+
+<Info>
+  User activity logs are available for the last 90 days. Enterprise customers can request extended activity log retention.
+</Info>
+
+## User Roles and Permissions
+
+Alertix provides three predefined user roles with different permission sets:
+
+### Admin Role
+
+Administrators have full access to all features and settings:
+
+- Manage users and permissions
+- Manage billing and subscription
+- Manage all ASINs and alerts
+- Access all analytics and reports
+- Full API access
+
+### Manager Role
+
+Managers have operational access but limited administrative capabilities:
+
+- View users (cannot manage)
+- View billing (cannot manage)
+- Manage all ASINs and alerts
+- Access all analytics and reports
+- Limited API access (configurable)
+
+### Analyst Role
+
+Analysts have limited access focused on day-to-day operations:
+
+- No user management
+- No billing access
+- View and manage alerts (configurable)
+- View ASINs (management configurable)
+- Access basic analytics and reports
+- No API access by default (configurable)
+
+<Info>
+  Enterprise customers can create custom roles with specific permission sets tailored to their organizational needs.
+</Info>
+
+## Error Codes
+
+| Status Code | Error Code | Description |
+|-------------|------------|-------------|
+| 400 | `invalid_request` | The request was malformed or missing required parameters |
+| 403 | `forbidden` | You don't have permission to manage users |
+| 404 | `not_found` | The requested user was not found |
+| 409 | `email_exists` | A user with this email already exists |
+| 422 | `validation_failed` | The request data failed validation |
+| 429 | `rate_limited` | You've exceeded the rate limit for this endpoint |
+| 507 | `user_limit_exceeded` | You've reached your plan's limit for team members |
+
+## Rate Limits
+
+User API endpoints are subject to the standard rate limits based on your subscription plan:
+
+| Plan | Rate Limit | Burst Capacity |
+|------|------------|----------------|
+| Business | 300 requests/minute | 500 requests |
+| Enterprise | 1,000+ requests/minute | Custom |
+
+<Info>
+  For additional help with the Users API, contact our developer support team at api-support@alertix.com.
+</Info>
