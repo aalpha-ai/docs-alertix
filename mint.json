@@ -81,16 +81,16 @@
         "support/help",
         "support/billing"
       ]
-    },
-    {
-      "group": "API Reference",
-      "pages": [
-        "api-reference/authentication",
-        "api-reference/alerts",
-        "api-reference/asins",
-        "api-reference/users"
-      ]
     }
+    // {
+    //   "group": "API Reference",
+    //   "pages": [
+    //     "api-reference/authentication",
+    //     "api-reference/alerts",
+    //     "api-reference/asins",
+    //     "api-reference/users"
+    //   ]
+    // }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/alertix",
