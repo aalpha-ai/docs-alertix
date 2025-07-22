@@ -47,9 +47,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "introduction"
-      ]
+      "pages": ["introduction"]
     },
     {
       "group": "User Guide",
@@ -76,21 +74,8 @@
     },
     {
       "group": "Security & Support",
-      "pages": [
-        "support/security",
-        "support/help",
-        "support/billing"
-      ]
+      "pages": ["support/security", "support/help", "support/billing"]
     }
-    // {
-    //   "group": "API Reference",
-    //   "pages": [
-    //     "api-reference/authentication",
-    //     "api-reference/alerts",
-    //     "api-reference/asins",
-    //     "api-reference/users"
-    //   ]
-    // }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/alertix",
