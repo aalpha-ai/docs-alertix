@@ -15,12 +15,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:support@alertix.com"
+      "url": "mailto:hello@aalpha.ai"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://app.alertix.com"
+    "url": "https://app-dds-blog-ai.vercel.app"
   },
   "tabs": [
     {
