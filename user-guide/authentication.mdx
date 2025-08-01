@@ -1,100 +1,177 @@
 ---
 title: 'Authentication'
-description: 'Sign in and account creation for Alertix'
+description: 'Secure access and account management for DDS Blog AI'
 ---
 
-Alertix provides a secure and streamlined authentication process to ensure your account and data remain protected while offering a smooth user experience.
+# Authentication
+
+DDS Blog AI uses Clerk, an enterprise-grade authentication system, to provide secure access while maintaining a seamless experience for dental practice content managers.
 
 ## Sign In
 
 <Frame>
-  <img src="/images/sign-in.png" alt="Sign In Screen" />
+  ![Sign In Screen](/images/sign-in.png)
 </Frame>
 
-The sign-in screen is the entry point for existing users to access their Alertix account.
+The sign-in screen provides secure access to your DDS Blog AI dashboard.
 
 ### UI Elements
 
-- **Alertix Logo**: Red bell icon at the top
-- **Heading**: "Sign in to Alertix"
-- **Welcome Message**: "Welcome back! Please sign in to continue"
-- **Email Input Field**: For entering registered email address
-- **Continue Button**: Proceeds to password entry or authentication
-- **Sign Up Link**: "Don't have an account? Sign up" for new users
+- **DDS Blog AI Logo**: Professional dental-themed logo
+- **Heading**: "Sign in to DDS Blog AI"
+- **Welcome Message**: "Welcome back to your dental content hub"
+- **Email Input**: For your registered email address
+- **Password Input**: Secure password field
+- **Continue Button**: Proceeds with authentication
+- **Sign Up Link**: "New to DDS Blog AI? Create an account"
 
-### Authentication Process
+### Authentication Flow
 
 <Steps>
   <Step title="Enter Email">
-    Provide the email address associated with your Alertix account.
+    Use the email address associated with your DDS Blog AI account.
   </Step>
-  <Step title="Enter Password">
-    After email validation, enter your secure password.
+  <Step title="Password Entry">
+    Enter your secure password to access your account.
   </Step>
-  <Step title="Two-Factor Authentication (if enabled)">
-    Complete the 2FA verification if you've enabled this security feature.
+  <Step title="Multi-Factor Authentication">
+    Complete additional verification if enabled (recommended for agencies).
   </Step>
-  <Step title="Access Dashboard">
-    Upon successful authentication, you'll be directed to your personalized dashboard.
+  <Step title="Access Platform">
+    Upon verification, you'll be directed to your content management dashboard.
   </Step>
 </Steps>
 
 <Tip>
-  If you've forgotten your password, click the "Forgot password?" link to initiate the password recovery process.
+  Agency users managing multiple dental practices should enable multi-factor authentication for enhanced security.
 </Tip>
 
 ## Account Creation
 
 <Frame>
-  <img src="/images/account-creation.png" alt="Account Creation Screen" />
+  ![Account Creation](/images/account-creation.png)
 </Frame>
 
-New users can create an Alertix account through our simple registration form.
+New users can quickly set up their DDS Blog AI account to begin managing dental practice content.
 
 ### UI Elements
 
-- **Alertix Logo**: Red bell icon at the top
-- **Heading**: "Create your account"
-- **Welcome Message**: "Welcome! Please fill in the details to get started."
-- **Form Fields**:
-  - First name input
-  - Last name input
-  - Email address input
-  - Password input with visibility toggle
-- **Continue Button**: Submits registration information
-- **Sign In Link**: "Already have an account? Sign in" for existing users
+- **DDS Blog AI Logo**: Professional branding
+- **Heading**: "Join DDS Blog AI"
+- **Welcome Message**: "Start creating engaging dental content today"
+- **Registration Fields**:
+  - First name
+  - Last name
+  - Business email
+  - Secure password
+  - Company/Agency name (optional)
+- **Create Account Button**: Initiates account setup
+- **Sign In Link**: "Already have an account? Sign in"
 
-### Registration Process
+### Registration Steps
 
 <Steps>
-  <Step title="Complete Registration Form">
-    Fill in all required fields with your personal information.
-  </Step>
-  <Step title="Create Password">
-    Choose a strong password that meets our security requirements.
+  <Step title="Basic Information">
+    Enter your professional details and create account credentials.
   </Step>
   <Step title="Email Verification">
-    Verify your email address through the confirmation link sent to your inbox.
+    Verify your email through our secure verification process.
   </Step>
-  <Step title="Begin Onboarding">
-    After successful registration, you'll be guided through the onboarding process.
+  <Step title="Account Setup">
+    Complete your profile and initial platform preferences.
+  </Step>
+  <Step title="Client Configuration">
+    Begin setting up your first dental practice client.
   </Step>
 </Steps>
 
 <Warning>
-  Password requirements: Minimum 8 characters, including at least one uppercase letter, one lowercase letter, one number, and one special character.
+  For security, passwords must be at least 12 characters long and include a mix of letters, numbers, and special characters.
 </Warning>
 
-## Security Measures
+## Security Features
 
-Alertix implements several security measures to protect your account:
+DDS Blog AI prioritizes the security of your dental practice content management:
 
-- **Secure Authentication**: We use Clerk, a trusted authentication provider, to handle all login processes securely.
-- **Email Verification**: All new accounts require email verification to prevent unauthorized access.
-- **Password Protection**: Passwords are securely hashed and never stored in plain text.
-- **Two-Factor Authentication**: Optional 2FA for an additional layer of security.
-- **Session Management**: Automatic session timeouts and the ability to view and manage active sessions.
+### Core Security Measures
+
+- **Clerk Authentication**: Enterprise-grade security for all authentication processes
+- **Role-Based Access**: Granular control over user permissions and content access
+- **Email Verification**: Mandatory verification for all new accounts
+- **Password Security**: Industry-standard encryption and secure storage
+- **Session Management**: Automatic timeouts and active session monitoring
+
+### Additional Protection
+
+| Feature | Benefit | Recommended For |
+|---------|----------|----------------|
+| Multi-Factor Auth | Enhanced account security | Agencies & multi-client users |
+| IP Allowlisting | Restricted access points | Enterprise clients |
+| Audit Logging | Activity tracking | Compliance requirements |
+| Auto-lockout | Brute force prevention | All accounts |
 
 <Info>
-  For additional security, we recommend enabling two-factor authentication in your account settings after registration.
+  We recommend enabling all available security features, especially if you manage content for multiple dental practices.
 </Info>
+
+## Account Management
+
+### User Roles
+
+DDS Blog AI supports multiple user roles to match your organization's structure:
+
+- **Admin**: Full platform access and client management
+- **Content Manager**: Content creation and publishing rights
+- **Client**: Limited access to specific practice content
+- **Reviewer**: Content approval capabilities
+
+<Note>
+  User roles can be customized to match your dental practice or agency workflow.
+</Note>
+
+### Password Management
+
+Maintain account security through proper password practices:
+
+1. Regular password updates (recommended every 90 days)
+2. Unique passwords for each user
+3. No sharing of login credentials
+4. Immediate deactivation of unused accounts
+
+<Warning>
+  Never share your login credentials, even with team members. Each user should have their own account with appropriate permissions.
+</Warning>
+
+## Getting Help
+
+If you need assistance with authentication:
+
+- Check our [FAQ section](/help/faq)
+- Contact support through your dashboard
+- Email support@ddsblogai.com
+- Review security best practices
+
+<CardGroup cols={2}>
+  <Card title="Security Guide" icon="shield-check">
+    Review our complete security documentation
+  </Card>
+  
+  <Card title="Support" icon="headset">
+    Get help with account access
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+After successful authentication:
+
+1. [Complete your profile](/settings/profile)
+2. [Set up your first client](/clients/new)
+3. [Configure security settings](/settings/security)
+4. [Start creating content](/create-content)
+
+<Tip>
+  Take time to review and enable all security features that match your organization's needs before starting client management.
+</Tip>
+
+DDS Blog AI's authentication system is designed to provide maximum security while maintaining ease of use, ensuring your dental content management platform remains protected and accessible to authorized users only. 

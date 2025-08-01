@@ -1,19 +1,15 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "venus",
-  "name": "Alertix",
-  "logo": {
-    "light": "/public/bell-red.png",
-    "dark": "/public/bell-red.png"
-  },
+  "theme": "quill",
+  "name": "DDS Blog AI",
   "favicon": "/public/icon.ico",
   "colors": {
-    "primary": "#FF4B4B",
-    "light": "#FF7171",
-    "dark": "#D62C2C",
+    "primary": "#000000",
+    "light": "#ffffff",
+    "dark": "#000000",
     "anchors": {
-      "from": "#FF4B4B",
-      "to": "#D62C2C"
+      "from": "#000000",
+      "to": "#3E92CC"
     }
   },
   "topbarLinks": [
@@ -41,7 +37,7 @@
     {
       "name": "Community",
       "icon": "discord",
-      "url": "https://discord.gg/alertix"
+      "url": "https://discord.gg/dds-blog"
     }
   ],
   "navigation": [
@@ -53,33 +49,16 @@
       "group": "User Guide",
       "pages": [
         "user-guide/authentication",
-        "user-guide/onboarding",
         "user-guide/dashboard",
-        "user-guide/alert-preferences",
-        "user-guide/asin-management",
-        "user-guide/alert-dashboard",
-        "user-guide/asin-dashboard",
-        "user-guide/account-management",
-        "user-guide/marketing-preferences",
-        "user-guide/user-profile"
+        "user-guide/clients-management",
+        "user-guide/create-content-management",
+        "user-guide/settings-management"
       ]
-    },
-    {
-      "group": "Features",
-      "pages": [
-        "features/alert-types",
-        "features/asin-monitoring",
-        "features/notifications"
-      ]
-    },
-    {
-      "group": "Security & Support",
-      "pages": ["support/security", "support/help", "support/billing"]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/alertix",
-    "github": "https://github.com/alertix",
-    "linkedin": "https://www.linkedin.com/company/alertix"
+    "twitter": "https://twitter.com/dds-blog",
+    "github": "https://github.com/dds-blog",
+    "linkedin": "https://www.linkedin.com/company/dds-blog"
   }
 }
